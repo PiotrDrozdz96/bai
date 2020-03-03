@@ -1,4 +1,4 @@
-const isCar = (car1, car2, car3) => [car1, car2, car3].findIndex((car) => car !== car1) === -1;
+const isCar = (car1, ...cars) => cars.every((car) => car === car1);
 
 console.log(isCar(true, true, true));
 console.log(isCar(false, false, false));
