@@ -3,13 +3,15 @@
   <head>
     <title>Shopping List</title>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="shoppinglist.js"></script>
   </head>
   <body>
     <h1>Shopping List</h1>
     <p>
       New item:
       <input type="text" name="item">
-      <button type="button" onclick="addItemToList()">Add</button>
+      <button type="button" id="addButton">Add</button>
     </p>
     <h3>List of items</h3>
     <ol id="shoppingList">
@@ -17,6 +19,5 @@
       <li>breakfast cereal</li>
       <li>bread</li>
     </ol>
-    <script src="shoppinglist.js"></script>
   </body>
 </html>
