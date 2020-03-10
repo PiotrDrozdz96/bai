@@ -15,7 +15,7 @@ const makeItalic = (element) => {
 };
 
 const changeBackgroundColor = (element, color) => {
-  ondbclick = '';
+  element.ondbclick = '';
   element.style = `background-color: ${color};`;
 };
 
