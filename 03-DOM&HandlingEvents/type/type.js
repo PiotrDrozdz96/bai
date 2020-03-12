@@ -9,7 +9,7 @@ const endTest = (element) => {
 
 const showResult = (value) => {
   resultElement.innerHTML = `
-  worlds: ${value.split(' ').length}
+  words: ${value.split(' ').length}
   characters: ${value.length}
   `;
 };
