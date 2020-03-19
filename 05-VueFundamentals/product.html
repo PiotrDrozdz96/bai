@@ -4,19 +4,39 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <h1>Grades</h1>    
+  <div id="app">
+    <b>RECEIPT</b>
+    <div>-----------------</div>
+    <div>Prouct: {{product.name}}</div>
+    <div>Unit Price: {{product.unitPrice}} zł</div>
+    <div>Quanity: {{product.quantity}}</div>
+    <div>Amount: {{amount}}</div>
+    <div>VAT Tax Rate: {{product.VAT}}%</div>
+    <div>=================</div>
+    <b>Total: {{total}} zł</b>
+  </div>
 
   <script>
-    var app = new Vue({
+    new Vue({
       el: '#app',
       data: {
         product: {
           name: 'book',
-          unitPrice: 17.5,
+          unitPrice: 17,
           quantity: 3,
-          VAT: 23
-        }
-      }
+          VAT: 23,
+        },
+      },
+      computed: {
+        amount() {
+          const { unitPrice, quantity } = this.product;
+          return unitPrice * quantity;
+        },
+        total() {
+          const { amount, product: { VAT } } = this;
+          return amount * (100 + VAT) / 100;
+        },
+      },
     });
   </script>
 

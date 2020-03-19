@@ -4,18 +4,23 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <h1>Address</h1>    
+  <h1>Address</h1>   
+  <div id="app">
+    <div>{{name}} {{surname}}</div>
+    <div>{{address}}</div>
+    <div>{{postcode}} {{city}}</div>
+  </div> 
 
   <script>
-    var app = new Vue({
+    new Vue({
       el: '#app',
       data: {
         name: 'Adam',
         surname: 'Kownacki',
         address: 'ul. Beskidzka 38',
         postcode: '23-908',
-        city: 'Stalowa Wola'
-      }
+        city: 'Stalowa Wola',
+      },
     });
   </script>
 

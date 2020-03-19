@@ -2,40 +2,64 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      table, th, td {
+        border: 1px solid black;
+      }
+
+      th {
+        width: 150px;
+        text-align: left;
+        padding: 5px;
+      }
+
+      td {
+        text-align: center;
+      }
+    </style>
 </head>
 <body>
+  <div id="app">
+    <table>
+      <tr><th v-for="label in labels">{{label}}</th></tr>
+      <tr v-for="film in films">
+        <th v-for="key in columns">{{film[key]}}</th>
+      </tr>
+    </table>
+  </div>
+
   <script>
-    var app = new Vue({
+    new Vue({
       el: '#app',
       data: {
-        films: [
-          {
-            title: 'Avatar',
-            year: 2009,
-            director: 'James Cameron',
-            budget: 237000000
-          },
-          {
-            title: 'Pulp Fiction',
-            year: 1994,
-            director: 'Quentin Tarantino',
-            budget: 8000000
-          },
-          {
-            title: 'Pitch Black',
-            year: 2000,
-            director: 'David Twohy',
-            budget: 23000000
-          },
-          {
-            title: 'War and Peace',
-            year: 1956,
-            director: 'King Vidor',
-            budget: 6000000
-          }
-        ] 
-        }
-      }
+        labels: ['Title', 'Year', 'Director', 'Budget'],
+        columns: ['title', 'year', 'director', 'budget'],
+        films: [{
+          title: 'Avatar',
+          year: 2009,
+          director: 'James Cameron',
+          budget: 237000000
+        }, {
+          title: 'Pulp Fiction',
+          year: 1994,
+          director: 'Quentin Tarantino',
+          budget: 8000000
+        }, {
+          title: 'Pitch Black',
+          year: 2000,
+          director: 'David Twohy',
+          budget: 23000000
+        }, {
+          title: 'War and Peace',
+          year: 1956,
+          director: 'King Vidor',
+          budget: 6000000
+        }],
+      },
     });
   </script>
 </body>

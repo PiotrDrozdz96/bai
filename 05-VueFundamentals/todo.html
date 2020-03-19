@@ -4,16 +4,26 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <div id="app">
+    <ol>
+      <li v-for="element in sortedTodo">{{element}}</li>
+    </ol>
+  </div>
+
   <script>
-    var app = new Vue({
+    new Vue({
       el: '#app',
       data: {
         todo: [
           'Purchase two tickets to cinema',
           'Feed cat',
           'Pay cable bill',
-          'Go shopping'
-      }
+          'Go shopping',
+        ],
+      },
+      computed: {
+        sortedTodo() { return [...this.todo].sort(); }
+      },
     });
   </script>
 

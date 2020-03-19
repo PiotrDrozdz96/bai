@@ -5,32 +5,26 @@
 </head>
 <body>
   <script>
-    var app = new Vue({
+    new Vue({
       el: '#app',
       data: {
-        films: [
-          {
-            language: 'Python',
-            popularity: 25.95
-          },
-          {
-            language: 'Java',
-            popularity: 21.42
-          },
-          {
-            language: 'JavaScript',
-            popularity: 8.26
-          },
-          {
-            language: 'C#',
-            popularity: 7.62
-          },
-          {
-            language: 'Php',
-            popularity: 7.37
-          }
-        ] 
-      }
+        languages: [{
+          language: 'Python',
+          popularity: 25.95
+        }, {
+          language: 'Java',
+          popularity: 21.42
+        }, {
+          language: 'JavaScript',
+          popularity: 8.26
+        }, {
+          language: 'C#',
+          popularity: 7.62
+        }, {
+          language: 'Php',
+          popularity: 7.37
+        }],
+      },
     });
   </script>
 </body>
