@@ -2,28 +2,64 @@
 <html>
 <head>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
+  <div id="app">
+    <canvas ref="myChart"></canvas>
+  </div>
   <script>
+    const _map = (array, path) => array.map((element) => element[path]);
+    
     new Vue({
       el: '#app',
       data: {
         languages: [{
-          language: 'Python',
-          popularity: 25.95
+          name: 'Python',
+          popularity: 25.95,
+          color: '#4682af',
         }, {
-          language: 'Java',
-          popularity: 21.42
+          name: 'Java',
+          popularity: 21.42,
+          color: '#de0032',
         }, {
-          language: 'JavaScript',
-          popularity: 8.26
+          name: 'JavaScript',
+          popularity: 8.26,
+          color: '#8cc83c',
         }, {
-          language: 'C#',
-          popularity: 7.62
+          name: 'C#',
+          popularity: 7.62,
+          color: '#643296',
         }, {
-          language: 'Php',
-          popularity: 7.37
+          name: 'Php',
+          popularity: 7.37,
+          color: '#505a91',
         }],
+      },
+      mounted() {
+        const { $refs, languages } = this;
+        const ctx = $refs.myChart.getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: _map(languages, 'name'),
+            datasets: [{
+              label: 'popularity',
+              backgroundColor: _map(languages, 'color'),
+              data: _map(languages, 'popularity'),
+            }],
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: { callback: (value) => `${value}%` }
+              }]
+            },
+            tooltips: {
+              callbacks: { label: (item) => `${item.yLabel}%`}
+            }
+          },
+        });
       },
     });
   </script>
