@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th {
+      text-transform: capitalize;
+    }
+
+    th, td {
+      width: 150px;
+      text-align: left;
+      padding: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <table>
+      <tr><th v-for="key in keys">{{key}}</th></tr>
+      <tr v-for="rate in rates">
+        <td v-for="key in keys">{{rate[key]}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        rates: [{}],
+      },
+      computed: {
+        keys() { return Object.keys(this.rates[0]) },
+      },
+      beforeCreate() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = display;
+        xhr.open('GET', 'http://api.nbp.pl/api/exchangerates/tables/A/?format=json');
+        xhr.send();
+
+        const setRates = (rates) => { this.rates = rates; };
+
+        function display(){
+          const { readyState, status, response } = this;
+
+          if(readyState === 4 && status === 200) {
+            const [{ rates }] = JSON.parse(response);
+            setRates(rates);
+          }
+        }
+      },
+    });
+  </script>
+</body>
