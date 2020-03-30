@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Elective Courses</h1>
+    <div v-for="course in courses">
+      <input type="checkbox" v-model="course.checked"/>
+      <span>{{course.name}}</span>
+    </div>
+    <div>Wybrane przedmioty: {{checked}}</div>
+  </div>
+
+  <script>
+    const createCourse = (name) => ({ name, checked: false });
+  
+    new Vue({
+      el: '#app',
+      data: {
+        courses: [
+          createCourse('Tworzenie urządzeń Internetu Rzeczy'),
+          createCourse('Design Thinking'),
+          createCourse('Comarch Business Intelligence w praktyce zarządzania'),
+          createCourse('Telepraca na współczesnym rynku pracy'),
+          createCourse('SPA - Tworzenie aplikacji internetowych'),
+        ],
+      },
+      computed: {
+        checked() { return this.courses.filter((course) => course.checked).length },
+      },
+    });
+  </script>
+</body>
+</html>

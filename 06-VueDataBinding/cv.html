@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .row { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>CV</h1>
+    <form v-on:submit="submit">
+      <div class="row">
+        <span>Imię:</span>
+        <input type="text" v-model="form.name"> 
+      </div>
+      <div class="row">
+        <span>Nazwisko:</span>
+        <input type="text" v-model="form.surname"> 
+      </div>
+      <div class="row">
+        <span>Wiek:</span>
+        <input type="number" v-model.number="form.age"> 
+      </div>
+      <div class="row">
+        <span>Płeć:</span>
+        <template v-for="value in sexs">
+          <input type="radio" v-model="form.sex" :value="value">
+          <span>{{value}}</span>
+        </template>
+      </div>
+      <div class="row">
+        <span>Wykształcenie:</span>
+        <select v-model="form.education">
+          <option v-for="value in educations" :value="value">{{value}}</option>
+        </select>
+      </div>
+      <div class="row">
+        <div>Umiejętności:</div>
+        <div v-for="skill in form.skills">
+          <input type="checkbox" v-model="skill.checked">
+          <span>{{skill.name}}</span>
+        </div>
+      </div>
+      <div class="row"><button type="submit">Zatwierdź</button></div>
+    </form>
+  </div>
+
+  <script>
+
+    const createSkill = (name) => ({ name, checked: false });
+  
+    new Vue({
+      el: '#app',
+      data: {
+        form: JSON.parse(localStorage.getItem('form')) || {
+          name: '',
+          surname: '',
+          age: '',
+          sex: '',
+          education: '',
+          skills: [
+            createSkill('obsługa komputera'),
+            createSkill('prawo jazdy'),
+            createSkill('kreatywność'),
+            createSkill('praca w zespole'),
+          ],
+        },
+        sexs: ['Mężczyzna', 'Kobieta'],
+        educations: ['brak', 'podstawowe', 'średnie', 'wyższe'],
+      },
+      methods: {
+        submit(event) {
+          event.preventDefault();
+          localStorage.setItem('form', JSON.stringify(this.form));
+        },
+      },
+    });
+  </script>
+</body>
+</html>
