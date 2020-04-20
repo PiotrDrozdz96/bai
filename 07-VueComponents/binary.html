@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <binary v-for="number in numbers" :number="number"/>
+  </div>
+
+  <script>
+    Vue.filter('toBinary', (value) => value.toString(2));
+
+    Vue.component('binary', {
+      template: '<div>{{ number }}(10) = {{ number | toBinary }}(2)</div>',
+      props: ['number'],
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        numbers: [8, 170, 204, 3855],
+      },
+    });
+  </script>
+</body>
+</html>
