@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    #app {
+      display: flex;
+    }
+
+    .film {
+      padding: 20px;
+      margin: 20px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <film v-for="film in films" v-bind="film" />
+  </div>
+
+  <script>
+    Vue.component('film', {
+      template: `
+        <div class="film">
+          <div class="row">Title: {{ title }}</div>
+          <div class="row">Year: {{ year }}</div>
+          <div class="row">Director: {{ director }}</div>
+        </div>
+      `,
+      props: ['title', 'year', 'director'],
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        films: [{
+          title: 'Avatar',
+          year: 2009,
+          director: 'James Cameron',
+        }, {
+          title: 'Pulp Fiction',
+          year: 1994,
+          director: 'Quentin Tarantino',
+        }, {
+          title: 'Pitch Black',
+          year: 2000,
+          director: 'David Twohy',
+        }],
+      },
+    });
+  </script>
+</body>
+</html>

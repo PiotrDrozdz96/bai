@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <div id="app">
+    <university />
+  </div>
 
-  <h1>Cracow University of Economics</h1>
-  <p>31-510 Kraków, Rakowicka 27, POLAND</p>
+  <script>
+    Vue.component('university', {
+      template: `
+        <div>
+          <h1>{{ name }}</h1>
+          <p>{{ city }}, {{ street }}, {{ country }}</p>
+        </div>
+      `,
+      data: () => ({
+        name: 'Cracow University of Economics',
+        city: '31-510 Kraków',
+        street: 'Rakowicka 27',
+        country: 'POLAND',
+      }),
+    });
 
+    new Vue({ el: '#app' });
+  </script>
 </body>
 </html>
