@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+  <div id="app">
+    <chart :labels="labels" :data="data" />
+  </div>
+  <script>
+    Vue.component('chart', {
+      template: '<canvas ref="myChart"></canvas>',
+      props: ['labels', 'data'],
+      mounted() {
+        const { $refs, labels, data } = this;
+        const ctx = $refs.myChart.getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Gospodarka',
+              borderColor: 'green',
+              data,
+            }],
+          },
+        });
+      },
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        labels: Array(10).fill(0).map((_, i) => 2010 + i),
+        data: Array(10).fill(0).map((_, i) => 100 - i * 10),
+      },
+    });
+  </script>
+</body>
+</html>
